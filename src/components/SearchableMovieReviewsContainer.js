@@ -7,3 +7,24 @@ const URL = 'https://api.nytimes.com/svc/movies/v2/reviews/search.json?'
             + `api-key=${NYT_API_KEY}`;
 
 // Code SearchableMovieReviewsContainer Here
+
+export default class SearchableMovieReviewsContainer extends Component {
+  state = {
+    reviews: [],
+    searchTerm: []
+  }
+  
+  componentDidMount() {
+    fetch('https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=<search-term>')
+    .then(resp => resp.json())
+    .then(data => {this.setState({ reviews: data.reviews, searchTerm: data.searchable-movie-reviews})})
+  }
+  
+  render(){
+    return(
+      <div className="searchable-movie-reviews">
+      <MovieReviews reviews={this.state.reviews} searchTerm={this.state.searchTerm}/>
+      </div>
+      )
+  }
+}
