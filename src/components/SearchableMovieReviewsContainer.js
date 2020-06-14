@@ -22,7 +22,13 @@ export default class SearchableMovieReviewsContainer extends Component {
         e.preventDefault()
         fetch(URL+this.state.searchTerm)
           .then(response => response.json())
-          .then(json => this.setState({ reviews: Array.from(json.results) }))
+          .then(data => {
+            this.setState({
+                 reviews: data.results,
+            })
+        })
+        e.preventDefault()
+        e.target.reset()
     }
 
     render() {
